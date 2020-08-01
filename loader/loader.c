@@ -7953,12 +7953,12 @@ VkResult setupLoaderTermPhysDevGroups(struct loader_instance *inst) {
     for (uint32_t icd_idx = 0; NULL != icd_term; icd_term = icd_term->next, icd_idx++) {
         uint32_t count_this_time = total_count - cur_icd_group_count;
 
-        local_phys_dev_groups[icd_idx].physicalDeviceCount = 0;
+        local_phys_dev_groups[cur_icd_group_count].physicalDeviceCount = 0;
         // Check if this group can be sorted
 #if defined(VK_USE_PLATFORM_WIN32_KHR)
-        local_phys_dev_group_sorted[icd_idx] = icd_term->scanned_icd->EnumerateAdapterPhysicalDevices != NULL;
+        local_phys_dev_group_sorted[cur_icd_group_count] = icd_term->scanned_icd->EnumerateAdapterPhysicalDevices != NULL;
 #else
-        local_phys_dev_group_sorted[icd_idx] = false;
+        local_phys_dev_group_sorted[cur_icd_group_count] = false;
 #endif
 
         // Get the function pointer to use to call into the ICD. This could be the core or KHR version
